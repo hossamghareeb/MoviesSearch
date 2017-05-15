@@ -18,7 +18,19 @@ class SearchViewModel {
     }
     
     func searchMoviesWithQuery(_ query: String) {
-        queriesStore.addQuery(query)
-        recentQueries = queriesStore.recentQueries()
+        
+        APIManager.shared.searchMoviesWithQuery(query) { [weak self] (result) in
+            guard let `self` = self else { return }
+            switch result {
+            case .success(let moviesResponse):
+                if let movies = moviesResponse as? [Movie], movies.isEmpty == false {
+                    movies.forEach({ print($0.name) })
+                    self.queriesStore.addQuery(query)
+                    self.recentQueries = self.queriesStore.recentQueries()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }

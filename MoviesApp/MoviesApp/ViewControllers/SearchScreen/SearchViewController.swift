@@ -22,6 +22,8 @@ class SearchViewController: UIViewController {
         
         moviesSearchBar.delegate = self
         recentQueriesTableView.dataSource = self
+        recentQueriesTableView.delegate = self
+        viewModel.delegate = self
     }
 }
 
@@ -57,5 +59,24 @@ extension SearchViewController: UITableViewDataSource {
         precondition(cell != nil, "Couldn't create cell with identinfier: cell")
         cell!.textLabel?.text = viewModel.recentQueries[indexPath.row]
         return cell!
+    }
+}
+
+extension SearchViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.searchWithQueryAtIndex(indexPath.row)
+    }
+}
+
+extension SearchViewController: SearchViewModelDelegate {
+    func searchViewModel(_ viewModel: SearchViewModel, gotMovies movies: [Movie], forSearchQuery query: String) {
+        
+        if let moviesViewController = storyboard?.instantiateViewController(withIdentifier: "MoviesViewController") as? MoviesViewController {
+            let moviesViewModel = MoviesViewModel(movies: movies, searchQuery: query)
+            moviesViewController.viewModel = moviesViewModel
+            show(moviesViewController, sender: self)
+        }
+        
     }
 }

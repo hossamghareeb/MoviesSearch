@@ -8,10 +8,16 @@
 
 import UIKit
 
+protocol SearchViewModelDelegate: class {
+    func searchViewModel(_ viewModel: SearchViewModel, gotMovies movies: [Movie], forSearchQuery query: String)
+}
+
 class SearchViewModel {
 
     private let queriesStore: RecentQueriesStore
     private(set) var recentQueries: [String]
+    weak var delegate: SearchViewModelDelegate?
+    
     init() {
         queriesStore = RecentQueriesStore(storageManager: RecentQueriesStorageManager())
         recentQueries = queriesStore.recentQueries()
@@ -24,13 +30,17 @@ class SearchViewModel {
             switch result {
             case .success(let moviesResponse):
                 if let movies = moviesResponse as? [Movie], movies.isEmpty == false {
-                    movies.forEach({ print($0.name) })
                     self.queriesStore.addQuery(query)
                     self.recentQueries = self.queriesStore.recentQueries()
+                    self.delegate?.searchViewModel(self, gotMovies: movies, forSearchQuery: query)
                 }
             case .failure(let error):
                 print(error)
             }
         }
+    }
+    
+    func searchWithQueryAtIndex(_ index: Int) {
+        searchMoviesWithQuery(recentQueries[index])
     }
 }

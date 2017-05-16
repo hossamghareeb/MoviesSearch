@@ -16,7 +16,6 @@ class RecentQueriesStore: BaseStoreMap {
     
     func addQuery(_ query: String) {
         var recent = recentQueries()
-        print(recent)
         recent = recent.filter({ $0 != query })
         recent.insert(query, at: 0) // Recent at the top
         if recent.count > maximumResults {

@@ -10,7 +10,7 @@ import Foundation
 
 class RecentQueriesStorageManager: StoreMapManagerProtocol {
     
-    let defaults = UserDefaults.standard
+    private let defaults = UserDefaults.standard
     
     func saveObject(_ object: Any?, forKey key: StoreMap.Keys) {
         defaults.set(object, forKey: key.rawValue)

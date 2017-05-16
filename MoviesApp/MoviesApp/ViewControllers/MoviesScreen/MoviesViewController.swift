@@ -11,6 +11,7 @@ import UIKit
 class MoviesViewController: UIViewController {
 
     var viewModel: MoviesViewModel!
+    private var refreshControl: UIRefreshControl?
     
     @IBOutlet private weak var moviesTableView: UITableView!
     override func viewDidLoad() {
@@ -18,7 +19,28 @@ class MoviesViewController: UIViewController {
 
         moviesTableView.rowHeight = UITableViewAutomaticDimension
         moviesTableView.estimatedRowHeight = 90
-        title = viewModel.searchQuery
+        title = viewModel.title
+        
+        setupPullToRefresh()
+    }
+    
+    private func setupPullToRefresh() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        moviesTableView.refreshControl = refreshControl
+    }
+    
+    @objc private func refresh() {
+        refreshControl?.beginRefreshing()
+        viewModel.refreshListOfMovies { [weak self] (error) in
+            guard let `self` = self else { return }
+            self.refreshControl?.endRefreshing()
+            if let error = error {
+                print(error)
+            } else {
+                self.moviesTableView.reloadData()
+            }
+        }
     }
 }
 

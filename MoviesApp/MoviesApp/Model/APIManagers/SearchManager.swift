@@ -13,8 +13,10 @@ extension APIManager {
 
     func searchMoviesWithQuery(_ query: String, completionHandler: @escaping APICompletionHandler) {
         let URL = "http://api.themoviedb.org/3/search/movie?api_key=2696829a81b1b5827d515ff121700838&query=\(query)"
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         Alamofire.request(URL).responseArray(keyPath: "results") { (response: DataResponse<[Movie]>) in
             
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             switch response.result {
             case .success:
                 let movies = response.result.value ?? []

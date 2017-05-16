@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class SearchViewController: UIViewController {
 
@@ -70,13 +71,14 @@ extension SearchViewController: UITableViewDelegate {
 }
 
 extension SearchViewController: SearchViewModelDelegate {
-    func searchViewModel(_ viewModel: SearchViewModel, gotMovies movies: [Movie], forSearchQuery query: String) {
-        
+    func searchViewModel(_ viewModel: SearchViewModel, gotMoviesViewModel moviesViewModel: MoviesViewModel) {
         if let moviesViewController = storyboard?.instantiateViewController(withIdentifier: "MoviesViewController") as? MoviesViewController {
-            let moviesViewModel = MoviesViewModel(movies: movies, searchQuery: query)
             moviesViewController.viewModel = moviesViewModel
             show(moviesViewController, sender: self)
         }
-        
+    }
+    
+    func searchViewModel(_ viewModel: SearchViewModel, didFailWithError error: Error) {
+        showErrorMessage(error.localizedDescription)
     }
 }

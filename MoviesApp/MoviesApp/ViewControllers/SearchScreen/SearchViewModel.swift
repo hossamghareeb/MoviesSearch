@@ -9,7 +9,8 @@
 import UIKit
 
 protocol SearchViewModelDelegate: class {
-    func searchViewModel(_ viewModel: SearchViewModel, gotMovies movies: [Movie], forSearchQuery query: String)
+    func searchViewModel(_ viewModel: SearchViewModel, gotMoviesViewModel moviesViewModel: MoviesViewModel)
+    func searchViewModel(_ viewModel: SearchViewModel, didFailWithError error: Error)
 }
 
 class SearchViewModel {
@@ -32,10 +33,13 @@ class SearchViewModel {
                 if let movies = moviesResponse as? [Movie], movies.isEmpty == false {
                     self.queriesStore.addQuery(query)
                     self.recentQueries = self.queriesStore.recentQueries()
-                    self.delegate?.searchViewModel(self, gotMovies: movies, forSearchQuery: query)
+                    let moviesViewModel = MoviesViewModel(movies: movies, searchQuery: query)
+                    self.delegate?.searchViewModel(self, gotMoviesViewModel: moviesViewModel)
+                } else {
+                    self.delegate?.searchViewModel(self, didFailWithError: NSError(domain: "MoviesApp", code: 0, userInfo: [NSLocalizedDescriptionKey: "No movies found with such query"]))
                 }
             case .failure(let error):
-                print(error)
+                self.delegate?.searchViewModel(self, didFailWithError: error)
             }
         }
     }

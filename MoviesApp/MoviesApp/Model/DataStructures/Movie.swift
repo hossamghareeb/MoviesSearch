@@ -8,6 +8,17 @@
 
 import ObjectMapper
 
+enum PosterSize: String {
+    case w92
+    case w185
+    case w500
+    case w580
+    
+    func posterURLStringForPath(_ path: String) -> String {
+        return Constants.posterBaseURLString + rawValue + path
+    }
+}
+
 class Movie: Mappable {
     
     let posterPath: String

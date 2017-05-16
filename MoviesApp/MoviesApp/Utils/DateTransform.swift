@@ -16,7 +16,7 @@ class DateTransform: TransformType {
     
     func transformFromJSON(_ value: Any?) -> Date? {
         if let dateString = value as? String {
-            let dateFormatter = DateFormatter()
+            let dateFormatter = Formatters.shared
             dateFormatter.dateFormat = dateFormat
             return dateFormatter.date(from: dateString)
         }
@@ -24,7 +24,7 @@ class DateTransform: TransformType {
     }
     func transformToJSON(_ value: Date?) -> String? {
         guard let date = value else { return "" }
-        let dateFormatter = DateFormatter()
+        let dateFormatter = Formatters.shared
         dateFormatter.dateFormat = dateFormat
         return dateFormatter.string(from: date)
     }

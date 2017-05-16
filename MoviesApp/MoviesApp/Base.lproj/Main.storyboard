@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6C9-Sf-LCP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6C9-Sf-LCP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -115,7 +115,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4W2-PP-eqw" secondAttribute="trailing" constant="8" id="1JI-Da-c3t"/>
                                                 <constraint firstItem="5qd-Fg-hDX" firstAttribute="leading" secondItem="V1y-8L-0P4" secondAttribute="trailing" constant="8" id="6Mh-7J-fxs"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="V1y-8L-0P4" secondAttribute="bottom" id="G1Z-Tq-E1L"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="V1y-8L-0P4" secondAttribute="bottom" priority="999" id="G1Z-Tq-E1L"/>
                                                 <constraint firstItem="RTG-46-LIt" firstAttribute="leading" secondItem="5qd-Fg-hDX" secondAttribute="leading" id="JzO-3I-uhw"/>
                                                 <constraint firstItem="4W2-PP-eqw" firstAttribute="leading" secondItem="5qd-Fg-hDX" secondAttribute="leading" id="LrR-UH-wyy"/>
                                                 <constraint firstItem="5qd-Fg-hDX" firstAttribute="top" secondItem="rxS-Vh-x1g" secondAttribute="top" constant="8" id="MyR-i2-MD7"/>

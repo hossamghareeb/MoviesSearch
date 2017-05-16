@@ -25,11 +25,11 @@ class MovieCellViewModel {
     }
     
     var posterURLString: String {
-        return "http://image.tmdb.org/t/p/w92" + movie.posterPath
+        return PosterSize.w92.posterURLStringForPath(movie.posterPath)
     }
     
     var releasedDateString: String {
-        let formatter = DateFormatter()
+        let formatter = Formatters.shared
         formatter.dateFormat = "MMM dd, yyyy"
         return formatter.string(from: movie.releaseDate)
     }

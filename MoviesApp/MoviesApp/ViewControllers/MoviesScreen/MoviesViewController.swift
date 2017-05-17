@@ -14,6 +14,7 @@ class MoviesViewController: UIViewController {
     private var refreshControl: UIRefreshControl?
     
     @IBOutlet private weak var moviesTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,7 +45,10 @@ class MoviesViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource -
+
 extension MoviesViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.moviesCount
     }

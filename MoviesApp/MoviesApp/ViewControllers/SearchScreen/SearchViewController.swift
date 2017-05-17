@@ -63,6 +63,8 @@ extension SearchViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate -
+
 extension SearchViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -70,13 +72,18 @@ extension SearchViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - UIScrollViewDelegate -
+
 extension SearchViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         view.endEditing(true)
     }
 }
 
+// MARK: - SearchViewModelDelegate -
+
 extension SearchViewController: SearchViewModelDelegate {
+    
     func searchViewModel(_ viewModel: SearchViewModel, gotMoviesViewModel moviesViewModel: MoviesViewModel) {
         if let moviesViewController = storyboard?.instantiateViewController(withIdentifier: "MoviesViewController") as? MoviesViewController {
             moviesViewController.viewModel = moviesViewModel

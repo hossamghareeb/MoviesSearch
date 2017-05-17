@@ -16,10 +16,12 @@ class RecentQueriesStore: BaseStoreMap {
     
     func addQuery(_ query: String) {
         var recent = recentQueries()
+        // Remove any query from history that matches the given one
         recent = recent.filter({ $0 != query })
-        recent.insert(query, at: 0) // Recent at the top
+        recent.insert(query, at: 0) // Add at the top
         if recent.count > maximumResults {
             recent.removeLast(recent.count - maximumResults)
+            // Removes last if size exceeds maximum results allowed
         }
         storageManager.saveObject(recent, forKey: key)
     }

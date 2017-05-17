@@ -19,6 +19,7 @@ class APIManager: NSObject {
 
     static let shared = APIManager()
     
+    // Force to use shared instance
     override private init() {
     }
 }

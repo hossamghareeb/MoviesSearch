@@ -11,10 +11,13 @@ import UIKit
 
 extension UIViewController {
     
-    func showErrorMessage(_ message: String) {
+    /**
+     Display a message to user which hides automatically after 3 seconds or after a given optional time
+     */
+    func showErrorMessage(_ message: String, afterDelay delay: TimeInterval = 3.0) {
         let hud = MBProgressHUD.showAdded(to: view, animated: true)
         hud.mode = .text
         hud.detailsLabel.text = message
-        hud.hide(animated: true, afterDelay: 3)
+        hud.hide(animated: true, afterDelay: delay)
     }
 }

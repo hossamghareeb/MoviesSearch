@@ -21,6 +21,7 @@ class MoviesViewModel {
     }
     
     private func prepareViewModelsForMovies() {
+        // Sort to display the latest released first
         let sortedMovies = movies.sorted(by: { $0.releaseDate > $1.releaseDate })
         viewModels = sortedMovies.map({ MovieCellViewModel(movie: $0) })
     }

@@ -8,6 +8,7 @@
 
 import ObjectMapper
 
+/// Transform class to handle the conversion between String and Date in object mapping from / to JSON
 class DateTransform: TransformType {
     typealias Object = Date
     typealias JSON = String

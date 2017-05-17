@@ -70,6 +70,12 @@ extension SearchViewController: UITableViewDelegate {
     }
 }
 
+extension SearchViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        view.endEditing(true)
+    }
+}
+
 extension SearchViewController: SearchViewModelDelegate {
     func searchViewModel(_ viewModel: SearchViewModel, gotMoviesViewModel moviesViewModel: MoviesViewModel) {
         if let moviesViewController = storyboard?.instantiateViewController(withIdentifier: "MoviesViewController") as? MoviesViewController {

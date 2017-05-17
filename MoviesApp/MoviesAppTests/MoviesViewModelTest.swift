@@ -15,21 +15,21 @@ import ObjectMapper
 class MoviesViewModelTest: QuickSpec {
     
     let movie1 = Movie(map: Map(mappingType: .fromJSON, JSON:
-        ["poster_path": "path",
+        ["poster_path": "/path",
          "title": "test1",
          "overview": "test",
          "release_date": "1989-06-23"
         ]))
     
     let movie2 = Movie(map: Map(mappingType: .fromJSON, JSON:
-        ["poster_path": "path",
+        ["poster_path": "/path",
          "title": "test2",
          "overview": "test",
          "release_date": "2010-06-23"
         ]))
     
     let movie3 = Movie(map: Map(mappingType: .fromJSON, JSON:
-        ["poster_path": "path",
+        ["poster_path": "/path",
          "title": "test3",
          "overview": "test",
          "release_date": "1999-06-23"
@@ -48,16 +48,27 @@ class MoviesViewModelTest: QuickSpec {
             })
         
             it("sorts the movies properly based on release date", closure: { 
-                let movieViewModel1 = viewModel.viewModelForMovieAtIndex(0)
-                expect(movieViewModel1.releasedDateString).to(equal("Jun 23, 2010"))
+                let movieCellViewModel1 = viewModel.viewModelForMovieAtIndex(0)
+                expect(movieCellViewModel1.releasedDateString).to(equal("Jun 23, 2010"))
                 
-                let movieViewModel2 = viewModel.viewModelForMovieAtIndex(1)
-                expect(movieViewModel2.releasedDateString).to(equal("Jun 23, 1999"))
+                let movieCellViewModel2 = viewModel.viewModelForMovieAtIndex(1)
+                expect(movieCellViewModel2.releasedDateString).to(equal("Jun 23, 1999"))
                 
-                let movieViewModel3 = viewModel.viewModelForMovieAtIndex(2)
-                expect(movieViewModel3.releasedDateString).to(equal("Jun 23, 1989"))
+                let movieCellViewModel3 = viewModel.viewModelForMovieAtIndex(2)
+                expect(movieCellViewModel3.releasedDateString).to(equal("Jun 23, 1989"))
                 
             })
+        }
+        
+        describe("MoviesCellViewModels when created") {
+            it("has correct props", closure: {
+                let movie = self.movie2! // recent one
+                let movieCellViewModel = viewModel.viewModelForMovieAtIndex(0)
+                expect(movieCellViewModel.movieName).to(equal(movie.name))
+                expect(movieCellViewModel.movieOverview).to(equal(movie.overview))
+                expect(movieCellViewModel.posterURLString).to(equal(Constants.posterBaseURLString + "w92" + movie.posterPath))
+            })
+            
         }
     }
 }

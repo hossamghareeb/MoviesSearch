@@ -1,4 +1,4 @@
 language: swift
 script: 
   xcodebuild -workspace MoviesApp.xcworkspace -scheme MoviesApp -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
-  xcodebuild test -workspace MoviesApp.xcworkspace -scheme MoviesAppTests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+  xcodebuild test -workspace MoviesApp.xcworkspace -scheme MoviesApp -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO

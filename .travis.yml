@@ -1,6 +1,5 @@
 language: swift
 xcode_project: MoviesApp.xcworkspace # path to your xcodeproj folder
-xcode_scheme: MoviesAppTests
-#script: 
-  #xcodebuild -workspace MoviesApp.xcworkspace -scheme MoviesApp -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
-  #xcodebuild test -workspace MoviesApp.xcworkspace -scheme MoviesApp -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3' ONLY_ACTIVE_ARCH=NO
+xcode_scheme: MoviesApp
+script: 
+  xcodebuild test -workspace MoviesApp.xcworkspace -scheme MoviesApp -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3' ONLY_ACTIVE_ARCH=NO
